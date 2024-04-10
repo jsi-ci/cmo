@@ -7,7 +7,7 @@
 import os
 
 import numpy as np
-from cmop.utils import CMOP, load_pareto_front_from_file
+from cmo.problems.utils import CMOP, load_pareto_front_from_file
 
 __all__ = ['CRE21', 'CRE22', 'CRE23', 'CRE24', 'CRE25', 'CRE31', 'CRE32', 'CRE51']
 

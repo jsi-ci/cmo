@@ -1,5 +1,5 @@
 import numpy as np
-from cmop.utils import CMOP, load_pareto_front_from_file
+from cmo.problems.utils import CMOP, load_pareto_front_from_file
 
 
 __all__ = ['CTP1', 'CTP2', 'CTP3', 'CTP4', 'CTP5', 'CTP6', 'CTP7', 'CTP8']

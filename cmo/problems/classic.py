@@ -1,6 +1,6 @@
 import os
 
-from cmop.utils import CMOP, load_pareto_front_from_file
+from cmo.problems.utils import CMOP, load_pareto_front_from_file
 import numpy as np
 
 

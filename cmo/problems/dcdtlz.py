@@ -1,7 +1,7 @@
 import numpy as np
 import os
-from cmop.cdtlz import CDTLZ
-from cmop.utils import load_pareto_front_from_file
+from cmo.problems.cdtlz import CDTLZ
+from cmo.problems.utils import load_pareto_front_from_file
 
 
 __all__ = ['DC1DTLZ1', 'DC1DTLZ3', 'DC2DTLZ1', 'DC2DTLZ3', 'DC3DTLZ1', 'DC3DTLZ3']

@@ -1,6 +1,6 @@
 import os
 import numpy as np
-from cmop.utils import CMOP, load_pareto_front_from_file
+from cmo.problems.utils import CMOP, load_pareto_front_from_file
 
 __all__ = ['RCM1', 'RCM2', 'RCM3', 'RCM4', 'RCM5', 'RCM6', 'RCM7', 'RCM8', 'RCM10',
            'RCM11', 'RCM12', 'RCM13', 'RCM14', 'RCM15', 'RCM16', 'RCM17', 'RCM18', 'RCM19', 'RCM20',

@@ -1,15 +1,15 @@
 import os
 
-from cmop.cdtlz import C1DTLZ3, C2DTLZ2, C3DTLZ4, C3DTLZ1, ConvexC2DTLZ2
-from cmop.cf import CF10
-from cmop.classic import SRN
-from cmop.ctp import CTP1, CTP2
-from cmop.dascmop import DASCMOP4, DASCMOP9, DASCMOP7
-from cmop.dcdtlz import DC3DTLZ3, DC2DTLZ1, DC2DTLZ3
-from cmop.mw import MW10, MW8
-from cmop.nctp import NCTP6
-from cmop.zxhcf import ZXHCF9
-from cmop.utils import load_pareto_front_from_file
+from cmo.problems.cdtlz import C1DTLZ3, C2DTLZ2, C3DTLZ4, C3DTLZ1, ConvexC2DTLZ2
+from cmo.problems.cf import CF10
+from cmo.problems.classic import SRN
+from cmo.problems.ctp import CTP1, CTP2
+from cmo.problems.dascmop import DASCMOP4, DASCMOP9, DASCMOP7
+from cmo.problems.dcdtlz import DC3DTLZ3, DC2DTLZ1, DC2DTLZ3
+from cmo.problems.mw import MW10, MW8
+from cmo.problems.nctp import NCTP6
+from cmo.problems.zxhcf import ZXHCF9
+from cmo.problems.utils import load_pareto_front_from_file
 
 
 class STEP1(DC3DTLZ3):

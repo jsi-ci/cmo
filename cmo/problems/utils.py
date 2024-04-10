@@ -1,7 +1,6 @@
 import os
 import numpy as np
 from abc import abstractmethod
-from itertools import combinations
 from pymoo.core.problem import Problem
 
 

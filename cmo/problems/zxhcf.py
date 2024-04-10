@@ -1,7 +1,7 @@
 import os
 import numpy as np
 
-from cmop.utils import CMOP, load_pareto_front_from_file
+from cmo.problems.utils import CMOP, load_pareto_front_from_file
 
 __all__ = ['ZXHCF1', 'ZXHCF2', 'ZXHCF3', 'ZXHCF4', 'ZXHCF5', 'ZXHCF6', 'ZXHCF7', 'ZXHCF8',
            'ZXHCF9', 'ZXHCF10', 'ZXHCF11', 'ZXHCF12', 'ZXHCF13', 'ZXHCF14', 'ZXHCF15', 'ZXHCF16']

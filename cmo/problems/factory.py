@@ -1,18 +1,18 @@
-from cmop.cdtlz import *
-from cmop.cf import *
-from cmop.ctp import *
-from cmop.dascmop import *
-from cmop.dcdtlz import *
-from cmop.lircmop import *
-from cmop.mw import *
-from cmop.nctp import *
-from cmop.cre import *
-from cmop.rcm import *
-from cmop.classic import *
-from cmop.modact import *
-from cmop.doc import *
-from cmop.zxhcf import *
-from cmop.step import *
+from cmo.problems.cdtlz import *
+from cmo.problems.cf import *
+from cmo.problems.ctp import *
+from cmo.problems.dascmop import *
+from cmo.problems.dcdtlz import *
+from cmo.problems.lircmop import *
+from cmo.problems.mw import *
+from cmo.problems.nctp import *
+from cmo.problems.cre import *
+from cmo.problems.rcm import *
+from cmo.problems.classic import *
+from cmo.problems.modact import *
+from cmo.problems.doc import *
+from cmo.problems.zxhcf import *
+from cmo.problems.step import *
 
 __all__ = ['get_problem', 'get_problem_list']
 
@@ -152,6 +152,12 @@ PROBLEMS = {
     'step22': STEP22,
     'step23': STEP23,
     'step24': STEP24,
+    'step25': STEP25,
+    'step26': STEP26,
+    'step27': STEP27,
+    'step28': STEP28,
+    'step29': STEP29,
+    'step30': STEP30,
     'bnh': BNH,
     'tnk': TNK,
     'srn': SRN,

@@ -1,9 +1,6 @@
 import os
 import numpy as np
-from cmop.utils import CMOP, load_pareto_front_from_file
-
-from pymoo.util.ref_dirs import get_reference_directions
-
+from cmo.problems.utils import CMOP, load_pareto_front_from_file
 
 __all__ = ['MW1', 'MW2', 'MW3', 'MW4', 'MW5', 'MW6', 'MW7', 'MW8', 'MW9', 'MW10', 'MW11',
            'MW12', 'MW13', 'MW14']

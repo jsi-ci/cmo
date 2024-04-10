@@ -1,6 +1,6 @@
 import os
 import numpy as np
-from cmop.utils import CMOP, load_pareto_front_from_file
+from cmo.problems.utils import CMOP, load_pareto_front_from_file
 
 __all_ = ['CS1', 'CT1', 'CTS1', 'CTSE1', 'CTSEI1',
           'CS2', 'CT2', 'CTS2', 'CTSE2', 'CTSEI2',

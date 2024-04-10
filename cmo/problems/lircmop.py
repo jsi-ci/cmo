@@ -1,6 +1,6 @@
 import os
 import numpy as np
-from cmop.utils import CMOP, load_pareto_front_from_file
+from cmo.problems.utils import CMOP, load_pareto_front_from_file
 
 __all__ = ['LIRCMOP1', 'LIRCMOP2', 'LIRCMOP3', 'LIRCMOP4', 'LIRCMOP5', 'LIRCMOP6', 'LIRCMOP7',
            'LIRCMOP8', 'LIRCMOP9', 'LIRCMOP10', 'LIRCMOP11', 'LIRCMOP12', 'LIRCMOP13', 'LIRCMOP14']

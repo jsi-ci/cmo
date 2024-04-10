@@ -1,7 +1,6 @@
 import os
-from abc import ABC
 import numpy as np
-from cmop.utils import CMOP, load_pareto_front_from_file
+from cmo.problems.utils import CMOP, load_pareto_front_from_file
 
 
 __all__ = ['DASCMOP1', 'DASCMOP2', 'DASCMOP3', 'DASCMOP4', 'DASCMOP5',
