@@ -552,10 +552,14 @@ class RCM15(CMOP):
 
 class RCM16(CMOP):
 
-    def __init__(self, scale_var=False, scale_obj=False):
+    def __init__(self, n_var=2, n_obj=2, scale_var=False, scale_obj=False):
         xl = np.array([0.01, 0.2])
         xu = np.array([0.05, 1.0])
-        super(RCM16, self).__init__(n_var=2, n_obj=2, n_iq_constr=2, n_eq_constr=0, xl=xl, xu=xu,
+
+        if n_var != 2 or n_obj != 2:
+            raise ValueError('Wrong number of variables and/or objectives.')
+
+        super(RCM16, self).__init__(n_var=n_var, n_obj=n_obj, n_iq_constr=2, n_eq_constr=0, xl=xl, xu=xu,
                                     scale_var=scale_var, scale_obj=scale_obj, name="RCM16")
 
     def _fn(self, X):
