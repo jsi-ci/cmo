@@ -49,7 +49,7 @@ for i in range(1, 31):
     problem = get_problem(problem_name)
 ```
 
-For accessing all continuous CMOPs:
+For accessing a large set of continuous CMOPs:
 ```python
 from cmo.problems.factory import get_problem, get_problem_list
 
@@ -89,7 +89,7 @@ print('Area under the ECDF curve:', ecdf.compute_auc())
 ecdf.visualise()
 ```
 
-For accessing all problems noted in the list below CMOPs:
+For accessing all problems noted in the list below, under CMOPs:
 ```python
 from cmo.problems.factory import get_problem, get_all_problem_list
 
