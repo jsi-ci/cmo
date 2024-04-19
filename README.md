@@ -60,6 +60,8 @@ for problem_name in get_problem_list():
 
 For integrating with Pymoo and using the indicators:
 ```python
+import numpy as np
+
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.optimize import minimize
 
