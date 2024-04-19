@@ -12,6 +12,8 @@ Install this package via pip using `pip install cmo`.
 
 ## Dependencies
 
+Required if not installing via pip.
+
 ### Problems Package
 
 - Pymoo 6.x: `pip install pymoo`
