@@ -12,21 +12,13 @@ Install this package via pip using `pip install cmo`.
 
 ## Dependencies
 
-Required if not installing via pip.
-
 ### Problems Package
 
-- Pymoo 6.x: `pip install pymoo`
-- Numpy: `pip install numpy`
-- Other:
-  - MODAct: https://github.com/epfl-lamd/modact
+- For MODAct suite: https://github.com/epfl-lamd/modact
 
 ### Indicator Package
 
 - Pygmo: see installation guide here: https://esa.github.io/pygmo2/install.html
-- Pymoo 6.x: `pip install pymoo`
-- Scipy: `pip install scipy`
-- Matplotlib: `pip install matplotlib`
 
 ## Example Use
 
