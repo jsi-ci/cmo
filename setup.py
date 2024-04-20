@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cmo',
-    version='0.1.2',
+    version='0.1.3',
     description='Constrained multiobjective benchmark suites and indicators',
     url='https://github.com/jsi-ci/cmo',
     author='Jordan Nicholas Cork',
@@ -10,9 +10,8 @@ setup(
     license='GPLv3',
     packages=find_packages(include=['cmo', 'cmo.*']),
     install_requires=[
-        'numpy>=1.19.5',
-        'pymoo>=0.6.0',
-        'pygmo>=2.19.5'
+        'numpy',
+        'pymoo>=0.6.0'
     ], 
     include_package_data=True
 )
