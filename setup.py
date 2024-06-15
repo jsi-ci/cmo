@@ -12,6 +12,6 @@ setup(
     install_requires=[
         'numpy',
         'pymoo>=0.6.0'
-    ],
+    ], 
     include_package_data=True
 )
