@@ -14,17 +14,11 @@ Install this package via pip using `pip install cmo`.
 
 ### Problems Package
 
-- Pymoo 6.x: `pip install pymoo`
-- Numpy: `pip install numpy`
-- Other:
-  - MODAct: https://github.com/epfl-lamd/modact
+- For MODAct suite: https://github.com/epfl-lamd/modact
 
 ### Indicator Package
 
 - Pygmo: see installation guide here: https://esa.github.io/pygmo2/install.html
-- Pymoo 6.x: `pip install pymoo`
-- Scipy: `pip install scipy`
-- Matplotlib: `pip install matplotlib`
 
 ## Example Use
 
@@ -49,7 +43,7 @@ for i in range(1, 31):
     problem = get_problem(problem_name)
 ```
 
-For accessing all continuous CMOPs:
+For accessing a large set of continuous CMOPs:
 ```python
 from cmo.problems.factory import get_problem, get_problem_list
 
@@ -61,6 +55,8 @@ for problem_name in get_problem_list():
 For integrating with Pymoo and using the indicators:
 
 ```python
+import numpy as np
+
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.optimize import minimize
 
@@ -88,7 +84,7 @@ print('Area under the ERD curve:', erd.compute_auc())
 erd.visualise()
 ```
 
-For accessing all problems noted in the list below CMOPs:
+For accessing all problems noted in the list below, under CMOPs:
 ```python
 from cmo.problems.factory import get_problem, get_all_problem_list
 
