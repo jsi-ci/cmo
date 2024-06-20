@@ -78,13 +78,14 @@ class ICMOP:
                 min_cv /= self.cv_norm
             return min_cv + self.tau_star
 
-        F_feas = self._filter_F(F, CV)
-        F_norm = self._normalise_F(F_feas)
+        F = self._filter_F(F, CV)
 
-        if self._ref_point_domination_check(F_norm):
-            F_norm = [point for point in F_norm if all(p < r for p, r in zip(point, self.ref_point))]
+        if self._ref_point_domination_check(F):
+            F_norm = self._normalise_F(F)
+            F_norm = [point for point in F_norm if all(p <= r for p, r in zip(point, self.ref_point))]
             if len(F_norm) == 0:
                 imop = 0
+                print('imop error')
             else:
                 hv = pg.hypervolume(F_norm).compute(self.ref_point)
                 imop = -1 * hv
@@ -110,7 +111,7 @@ class ICMOP:
         Returns:
         - bool: True if the reference point dominates, False otherwise.
         """
-        return any(all(self.ref_point[i] >= f[i] for i in range(len(self.ref_point))) for f in F)
+        return any(all(self.nadir[i] >= f[i] for i in range(len(self.nadir))) for f in F)
 
     def _get_distances(self, F):
         """
@@ -125,14 +126,14 @@ class ICMOP:
         distances = []
         for f in F:
             is_ds = True
-            for i in range(len(self.ref_point)):
-                if self.ref_point[i] > f[i]:
+            for i in range(len(self.nadir)):
+                if self.nadir[i] > f[i]:
                     is_ds = False
 
             if is_ds:
-                distances.append(np.linalg.norm(f - self.ref_point))
+                distances.append(np.linalg.norm(f - self.nadir))
             else:
-                D = [d for d in f - self.ref_point if d > 0]
+                D = [d for d in f - self.nadir if d > 0]
                 distances.append(np.min(D) if len(D) > 0 else 0)
 
         distances = [d for d in distances if not np.isnan(d)]

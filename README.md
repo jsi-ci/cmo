@@ -2,7 +2,7 @@
 
 This project contains Python implementations of several CMO benchmark suites, including the benchmark suite of collated problems, called STEP. The details of the suites and the problems they contain are provided at the bottom of this readme.
 
-The project also contains implementations of the Indicator for Constrained Multi-Objective Problems (ICMOP), the Empirical Runtime Distribution Function (ECDF) for ICMOP, and a Pymoo callback for tracking the runtime.
+The project also contains implementations of the Indicator for Constrained Multi-Objective Problems (ICMOP), the Empirical Runtime Distribution (ERD) for ICMOP, and a Pymoo callback for tracking the runtime.
 
 The problems are designed to work in much the same manner as they do in Pymoo (https://pymoo.org/index.html). Therefore, they work in the Pymoo `minimize` function, with Pymoo algorithms.
 
@@ -59,11 +59,12 @@ for problem_name in get_problem_list():
 ```
 
 For integrating with Pymoo and using the indicators:
+
 ```python
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.optimize import minimize
 
-from cmo.indicator.ecdf import ECDF
+from cmo.indicator.erd import ERD
 from cmo.indicator.icmop import ICMOP
 from cmo.indicator.runtime_callback import RuntimeCallback
 from cmo.problems.factory import get_problem
@@ -78,13 +79,13 @@ res = minimize(problem,
                verbose=False,
                callback=RuntimeCallback(icmop))
 
-ecdf = ECDF(runtimes=[res.algorithm.callback.runtime],
-            tau_ref=0,  # This value is used to offset the targets
-            eps=np.linspace(2, -1, 100))
+erd = ERD(runtimes=[res.algorithm.callback.runtime],
+           tau_ref=0,  # This value is used to offset the targets
+           eps=np.linspace(2, -1, 100))
 
-print('Area under the ECDF curve:', ecdf.compute_auc())
+print('Area under the ERD curve:', erd.compute_auc())
 
-ecdf.visualise()
+erd.visualise()
 ```
 
 For accessing all problems noted in the list below CMOPs:

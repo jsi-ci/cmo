@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-class ECDF:
+class ERD:
     """
-    Empirical Cumulative Distribution Function (ECDF) analysis for runtime data.
+    Empirical Cumulative Distribution Function (ERD) analysis for runtime data.
 
     Parameters:
     - runtimes (numpy.ndarray): 2D Array where each row contains runtime data for a specific configuration.
@@ -12,13 +12,13 @@ class ECDF:
     - epsilons (list of floats): Incremental values to be added to tau_ref for target computations.
 
     Methods:
-    - compute_auc(): Compute the Area Under the ECDF Curve (AUC).
-    - visualise(title=None, show=True, save=False, path=None): Visualize the runtime and ECDF curves.
+    - compute_auc(): Compute the Area Under the ERD Curve (AUC).
+    - visualise(title=None, show=True, save=False, path=None): Visualize the runtime and ERD curves.
     """
 
     def __init__(self, runtimes, tau_ref, eps):
         """
-        Initialize the ECDF instance with runtime data and target computation parameters.
+        Initialize the ERD instance with runtime data and target computation parameters.
 
         Parameters:
         - runtimes (numpy.ndarray): 2D Array where each row contains runtime data for a specific configuration.
@@ -29,9 +29,9 @@ class ECDF:
         self.eps = eps
         self.tau_ref = tau_ref
 
-        self.runtime, self.ecdf = None, None
+        self.runtime, self.erd = None, None
         self._aggregate_runtimes()
-        self._compute_ecdf()
+        self._compute_erd()
 
     def _aggregate_runtimes(self):
         """
@@ -41,37 +41,37 @@ class ECDF:
         """
         self.runtime = np.array([np.mean(lst) + self.tau_ref for lst in np.transpose(self.runtimes)])
 
-    def _compute_ecdf(self):
+    def _compute_erd(self):
         """
-        Compute the Empirical Cumulative Distribution Function (ECDF) values based on the aggregated runtimes and targets.
+        Compute the Empirical Cumulative Distribution Function (ERD) values based on the aggregated runtimes and targets.
 
-        This method updates the 'ecdf' attribute with the computed ECDF values.
+        This method updates the 'erd' attribute with the computed ERD values.
         """
-        ecdf = [0]
+        erd = [0]
         for r in self.runtime:
-            current = ecdf[-1]
-            for t in self.eps[ecdf[-1]:]:
+            current = erd[-1]
+            for t in self.eps[erd[-1]:]:
                 if r <= t:
                     current += 1
                 else:
                     break
-            ecdf.append(current)
-        ecdf_norm = [val / len(self.eps) for val in ecdf]
-        self.ecdf = ecdf_norm
+            erd.append(current)
+        erd_norm = [val / len(self.eps) for val in erd]
+        self.erd = erd_norm
 
     def compute_auc(self):
         """
-        Compute the Area Under the ECDF Curve (AUC).
+        Compute the Area Under the ERD Curve (AUC).
 
         Returns:
         - float: The computed AUC value.
         """
         x = np.linspace(0, len(self.runtime), num=len(self.runtime) + 1) / len(self.runtime)
-        return np.trapz(self.ecdf, x)
+        return np.trapz(self.erd, x)
 
     def visualise(self, title=None, show=True, save=False, path=None):
         """
-        Visualize the runtime and ECDF curves with options to show and/or save the plot.
+        Visualize the runtime and ERD curves with options to show and/or save the plot.
 
         Parameters:
         - title (str, optional): Title for the plot.
@@ -88,12 +88,12 @@ class ECDF:
         ax1.plot(self.runtime, color=color)
         ax1.tick_params(axis='y', labelcolor=color)
 
-        ax2 = ax1.twinx()  # Create another y-axis for the ECDF
+        ax2 = ax1.twinx()  # Create another y-axis for the ERD
         color = 'tab:blue'
-        ax2.set_ylabel('ECDF', color=color)
-        ax2.plot(self.ecdf, color=color)
+        ax2.set_ylabel('ERD', color=color)
+        ax2.plot(self.erd, color=color)
         ax2.tick_params(axis='y', labelcolor=color)
-        ax2.axhline(y=0.5, color='green', linestyle='--', label='ECDF = 0.5')
+        ax2.axhline(y=0.5, color='green', linestyle='--', label='ERD = 0.5')
 
         if title:
             plt.suptitle(title)

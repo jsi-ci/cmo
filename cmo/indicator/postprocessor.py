@@ -1,4 +1,4 @@
-from cmo.indicator.ecdf import ECDF
+from cmo.indicator.erd import ERD
 from cmo.indicator.icmop import ICMOP
 
 
@@ -73,7 +73,7 @@ class PostProcessor:
         # Compute runtime for each run
         self.runtimes = [self._get_runtime(run) for run in self.runs]
         # Initialize ECDF processor with computed runtimes and target specifications
-        self.ecdf_processor = ECDF(self.runtimes, self.tau_ref, self.epsilon)
+        self.ecdf_processor = ERD(self.runtimes, self.tau_ref, self.epsilon)
         # Collate runtime data
         self.collated_runtime = self.ecdf_processor.runtime
         # Compute AUC for ECDF
@@ -101,7 +101,7 @@ class PostProcessor:
         Returns:
         - numpy.ndarray: The computed ECDF values.
         """
-        return self.ecdf_processor.ecdf
+        return self.ecdf_processor.erd
 
     def get_auc_ecdf(self):
         """
