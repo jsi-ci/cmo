@@ -86,6 +86,7 @@ erd.visualise()
 
 For using the accumulative ICMOP indicator (available for 2 objective problems only):
 ```python
+from cmo.indicator.accumulative_icmop import AccumulativeICMOP
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from cmo.problems.step import STEP1
 
