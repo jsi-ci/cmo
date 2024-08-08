@@ -51,10 +51,21 @@ class AccumulativeICMOP:
         self.samples = samples
         self.normalize = normalize
         self.dist_norm, self.cv_norm = None, None
-        if normalize:
-            self._get_normalised_values()
         self.nda = NDA(reference_point=self.ref_point)
         self.constraint_value = None
+        self.min_dist = None
+        if normalize:
+            self._get_normalised_values()
+
+    def min_dist_check(self, F):
+        if len(self.nda) == 0:
+            distances = self._get_distances(F)
+            min_dist = np.min(distances)
+            if self.normalize:
+                min_dist /= self.dist_norm
+
+            if self.min_dist is None or min_dist < self.min_dist:
+                self.min_dist = min_dist
 
     def add(self, F, CV):
         """
@@ -66,7 +77,7 @@ class AccumulativeICMOP:
         """
         if np.array(F).ndim > 1:
             raise ValueError('F should only represent one solution.')
-        if isinstance(CV, (list, tuple, set, dict)):
+        if isinstance(CV, (list, tuple, set, dict, np.ndarray)):
             raise ValueError('CV should be a single value.')
 
         if CV != 0:
@@ -79,6 +90,7 @@ class AccumulativeICMOP:
 
         self.constraint_value = self.tau_star
         self.nda.add(self._normalise_f(F))
+        self.min_dist_check([F])
 
     def add_list(self, F, CV):
         """
@@ -106,6 +118,7 @@ class AccumulativeICMOP:
         self.constraint_value = self.tau_star
         F = self._filter_F(F, CV)
         self.nda.add_list(self._normalise_F(F))
+        self.min_dist_check(F)
 
     def compute(self):
         """
@@ -117,14 +130,10 @@ class AccumulativeICMOP:
         if self.constraint_value > self.tau_star:
             return self.constraint_value
 
-        if self._ref_point_domination_check(self.nda):
-            hv = self.nda.hypervolume
-            imop = -1 * hv
+        if len(self.nda) > 0:
+            imop = -1 * self.nda.hypervolume
         else:
-            distances = self._get_distances(self.nda)
-            imop = np.min(distances)
-            if self.normalize:
-                imop /= self.dist_norm
+            imop = self.min_dist
 
         return min(imop, self.tau_star)
 
@@ -140,18 +149,6 @@ class AccumulativeICMOP:
         - list: Filtered objective values.
         """
         return [f for f, cv in zip(F, CV) if cv == 0.0]
-
-    def _ref_point_domination_check(self, F):
-        """
-        Check if the reference point dominates the objective values.
-
-        Parameters:
-        - F (numpy.ndarray): Array containing the normalized objective values.
-
-        Returns:
-        - bool: True if the reference point dominates, False otherwise.
-        """
-        return any(all(self.nadir[i] >= f[i] for i in range(len(self.nadir))) for f in F)
 
     def _get_distances(self, F):
         """
