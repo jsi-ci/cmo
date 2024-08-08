@@ -11,7 +11,8 @@ setup(
     packages=find_packages(include=['cmo', 'cmo.*']),
     install_requires=[
         'numpy',
-        'pymoo>=0.6.0'
+        'pymoo>=0.6.0',
+        'moarchiving'
     ],
     include_package_data=True
 )
