@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='cmo',
-    version='0.1.7',
+    version='0.1.8',
     description='Constrained multiobjective benchmark suites and indicators',
     url='https://github.com/jsi-ci/cmo',
     author='Jordan Nicholas Cork',
