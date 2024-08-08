@@ -84,6 +84,29 @@ print('Area under the ERD curve:', erd.compute_auc())
 erd.visualise()
 ```
 
+For using the accumulative ICMOP indicator (available for 2 objective problems only):
+```python
+from pymoo.algorithms.moo.nsga2 import NSGA2
+from cmo.problems.step import STEP1
+
+n_evals = 1000
+problem = STEP1()
+
+algorithm = NSGA2(pop_size=100)
+algorithm.setup(problem, termination=('n_evals', n_evals), verbose=False)
+
+runtime = []
+a_icmop = AccumulativeICMOP(problem)
+
+while algorithm.has_next():
+    algorithm.next()
+    res = algorithm.result()
+
+    for f, cv in zip(res.pop.get('F'), res.pop.get('CV')):
+        a_icmop.add(f, cv)
+        runtime.append(a_icmop.compute())
+```
+
 For accessing all problems noted in the list below, under CMOPs:
 ```python
 from cmo.problems.factory import get_problem, get_all_problem_list
