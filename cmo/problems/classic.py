@@ -3,8 +3,7 @@ import os
 from cmo.problems.utils import CMOP, load_pareto_front_from_file
 import numpy as np
 
-
-__all__ = ['BNH', 'TNK', 'SRN', 'OSY', 'WB']
+__all__ = ['BNH', 'TNK', 'SRN', 'OSY', 'WB', 'PV']
 
 
 class BNH(CMOP):
@@ -142,3 +141,32 @@ class WB(CMOP):
     def _calc_pareto_front(self, *args, **kwargs):
         fname = f"{self.name.lower()}_M{self.n_obj}_D{self.n_var}.pf"
         return load_pareto_front_from_file(os.path.join("Classic", fname))
+
+
+class PV(CMOP):
+    def __init__(self, scale_var=False, scale_obj=False):
+        xl = np.array([0.51, 0.51, 25, 25])
+        xu = np.array([20.49, 20.49, 150, 240])
+        super(PV, self).__init__(
+            n_var=4, n_obj=2, n_iq_constr=3, n_eq_constr=0, xl=xl, xu=xu, scale_var=scale_var, scale_obj=scale_obj,
+            name="PV")
+
+    def _fn(self, X):
+        x1 = np.round(X[:, 0])
+        x2 = np.round(X[:, 1])
+        x3 = X[:, 2]
+        x4 = X[:, 3]
+
+        z1 = 0.0625 * x1
+        z2 = 0.0625 * x2
+
+        # Objectives
+        f1 = 1.7781 * z2 * x3 ** 2 + 0.6224 * z1 * x2 * x4 + 3.1661 * z1 ** 2 * x4 + 19.84 * z1 ** 2 * x3
+        f2 = -np.pi * x3 ** 2 * x4 - (4 / 3) * np.pi * x3 ** 3
+
+        # Constraints
+        g1 = 0.00954 * x3 - z2
+        g2 = 0.0193 * x3 - z1
+        g3 = 1296000 + f2
+
+        return np.column_stack([f1, f2, g1, g2, g3])

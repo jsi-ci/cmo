@@ -1,0 +1,9 @@
+Metadata-Version: 2.1
+Name: cmo
+Version: 0.1.8
+Summary: Constrained multiobjective benchmark suites and indicators
+Home-page: https://github.com/jsi-ci/cmo
+Author: Jordan Nicholas Cork
+Author-email: jordan_n_cork@hotmail.com
+License: GPLv3
+License-File: LICENSE
