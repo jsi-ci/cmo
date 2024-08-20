@@ -104,7 +104,7 @@ while algorithm.has_next():
     res = algorithm.result()
 
     for f, cv in zip(res.pop.get('F'), res.pop.get('CV')):
-        a_icmop.add(f, cv)
+        a_icmop.add(f, cv[0])
         runtime.append(a_icmop.compute())
 ```
 
