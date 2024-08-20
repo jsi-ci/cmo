@@ -3,6 +3,7 @@ from scipy.stats import uniform
 from pymoo.core.individual import calc_cv
 from moarchiving import BiobjectiveNondominatedSortedList as NDA
 
+
 def calculate_cv(G, H):
     """
     Calculate the constraint violation values for a given set of constraints.
@@ -15,6 +16,7 @@ def calculate_cv(G, H):
     - list: List of constraint violation values.
     """
     return [cv for cv in calc_cv(G, H, config=None) if not np.isnan(cv)]
+
 
 class AccumulativeICMOP:
     """
