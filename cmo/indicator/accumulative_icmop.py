@@ -2,7 +2,7 @@ import numpy as np
 from scipy.stats import uniform
 from pymoo.core.individual import calc_cv
 from moarchiving import BiobjectiveNondominatedSortedList as NDA
-
+from decimal import *
 
 def calculate_cv(G, H):
     """
@@ -16,7 +16,6 @@ def calculate_cv(G, H):
     - list: List of constraint violation values.
     """
     return [cv for cv in calc_cv(G, H, config=None) if not np.isnan(cv)]
-
 
 class AccumulativeICMOP:
     """
@@ -49,7 +48,7 @@ class AccumulativeICMOP:
         self.ideal = np.array(problem.ideal_point())
         self.nadir = np.array(problem.nadir_point())
         self.ref_point = np.ones_like(self.nadir)
-        self.tau_star = tau_star
+        self.tau_star = Decimal(tau_star)
         self.samples = samples
         self.normalize = normalize
         self.dist_norm, self.cv_norm = None, None
@@ -82,6 +81,7 @@ class AccumulativeICMOP:
         if isinstance(CV, (list, tuple, set, dict, np.ndarray)):
             raise ValueError('CV should be a single value.')
 
+        CV = Decimal(CV)
         if CV != 0:
             if self.normalize:
                 CV /= self.cv_norm
@@ -110,6 +110,7 @@ class AccumulativeICMOP:
                 raise ValueError('Values for F and CV have not been provided.')
 
             min_cv = np.min(CV)
+            min_cv = Decimal(min_cv)
             if self.normalize:
                 min_cv /= self.cv_norm
             cv_norm = min_cv + self.tau_star
@@ -223,4 +224,4 @@ class AccumulativeICMOP:
         dist_norm = 1 if med_D == 0 or np.isnan(med_D) else 10 ** np.ceil(np.log(med_D))
         cv_norm = 1 if med_CV == 0 or np.isnan(med_CV) else 10 ** np.ceil(np.log(med_CV))
 
-        self.dist_norm, self.cv_norm = dist_norm, cv_norm
+        self.dist_norm, self.cv_norm = dist_norm, Decimal(cv_norm)
